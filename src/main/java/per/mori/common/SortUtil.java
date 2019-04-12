@@ -272,8 +272,42 @@ public class SortUtil {
             AdjustHeap(input,i,n);
         }
     }
+//uncheck
+    public static void baseSort(Integer[] input,int n,int k,int r){
+        Integer [] cnt=new Integer[10];
+        Integer [] temp=new Integer[n];
+        /**
+         * n长度
+         * k位数
+         * r基数
+         * cnt  每轮binsort的桶
+         */
 
-    public static void baseSort(){
+        for(int i =0,rtok=1;i<k;i++,rtok*=r){
+            //初始化
+            for(int j=0;j<r;j++){
+                cnt[j]=0;
+            }
+
+            //计算个数
+            for(int j=0;j<n;j++){
+                cnt[(input[j]/rtok)%r]++;
+            }
+            //每个桶累计含有此前的数据量
+            for(int j=1;j<r;j++){
+                cnt[j]=cnt[j-1]+cnt[j];
+            }
+
+            for(int j=n-1;j>=0;j--){
+                //倒叙求余放桶 同时桶数目当作temp的长度  从后往前存储每轮排了基数的数
+                cnt[(input[j]/rtok)%r]--;
+                temp[cnt[(input[j])%r]]=input[j];
+            }
+
+            //最后遍历排好序的桶
+
+        }
+
 
     }
 
